@@ -39,7 +39,7 @@ export default function Chattify() {
   //fetch for web-sockets
 
   useEffect(()=>{ 
-     sockett.current = io("ws://localhost:5010")
+     sockett.current = io("chatify-app-1-0r2j.onrender.com");
      socket.current = io("ws://localhost:5011")
   }, [])
 
