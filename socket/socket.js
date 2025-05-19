@@ -1,6 +1,6 @@
-const io = require("socket.io")(5010, { 
+const io = require("socket.io")(PORT, { 
     cors: { 
-        origin: 'http://localhost:5001', 
+        origin: 'https://frontend-service-yc9z.onrender.com', 
     },
 }); 
 
