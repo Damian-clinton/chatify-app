@@ -40,7 +40,7 @@ export default function Chattify() {
 
   useEffect(()=>{ 
      sockett.current = io("chatify-app-1-0r2j.onrender.com");
-     socket.current = io("ws://localhost:5011")
+     socket.current = io("server-service-t3fu.onrender.com")
   }, [])
 
   useEffect(()=> { 
@@ -115,7 +115,7 @@ export default function Chattify() {
   useEffect(function() {
       async function verifyUser() {
           try {
-              const response = await axios.get('http://localhost:5000/auth/verify', {
+              const response = await axios.get('https://server-service-t3fu.onrender.com/auth/verify', {
                   headers: {
                       'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
                   }
@@ -138,7 +138,7 @@ export default function Chattify() {
         return;
     }
     try {
-        const res = await axios.get(`http://localhost:5000/client/search/${firstname.trim()}`, {
+        const res = await axios.get(`https://server-service-t3fu.onrender.com/client/search/${firstname.trim()}`, {
             headers: {
                 'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
             }
@@ -170,7 +170,7 @@ export default function Chattify() {
     }
 
     try { 
-      const res = await axios.post('http://localhost:5000/client/conversations/', {senderId, receiverId}, {
+      const res = await axios.post('https://server-service-t3fu.onrender.com/client/conversations/', {senderId, receiverId}, {
         headers: {
             'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
         }
@@ -186,7 +186,7 @@ export default function Chattify() {
     async function getConversation() { 
       const senderId = window.localStorage.getItem('user');
       try { 
-        const res = await axios.get('http://localhost:5000/client/conversations/', { params : { senderId }, 
+        const res = await axios.get('https://server-service-t3fu.onrender.com/client/conversations/', { params : { senderId }, 
           headers: {
               'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
           }
@@ -210,7 +210,7 @@ export default function Chattify() {
   async function getConversation() { 
     const senderId = window.localStorage.getItem('user');
     try { 
-      const res = await axios.get('http://localhost:5000/client/conversations/', { params : { senderId }, 
+      const res = await axios.get('https://server-service-t3fu.onrender.com/client/conversations/', { params : { senderId }, 
         headers: {
             'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
         }
@@ -238,7 +238,7 @@ export default function Chattify() {
 
       async function getFilteredconversation() { 
         try { 
-          const res = await axios.get('http://localhost:5000/client/conversation/', { params: { friendId },
+          const res = await axios.get('https://server-service-t3fu.onrender.com/client/conversation/', { params: { friendId },
             headers: {
                 'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
             }
@@ -283,7 +283,7 @@ async function getFilterChats(id) {
 
               if(memberId && senderId) { 
                 try { 
-                  const res = await axios.get('http://localhost:5000/client/getconversationid/', { params : {memberId, senderId}, 
+                  const res = await axios.get('https://server-service-t3fu.onrender.com/client/getconversationid/', { params : {memberId, senderId}, 
                     headers: {
                         'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
                     }
@@ -308,7 +308,7 @@ async function getFilterChats(id) {
       return;
   }
     try{ 
-        const res = await axios.post('http://localhost:5000/client/messages/', { 
+        const res = await axios.post('https://server-service-t3fu.onrender.com/client/messages/', { 
         conversationID: conversationID,
         sender: senderId, 
         context: message}, {
@@ -331,7 +331,7 @@ async function getFilterChats(id) {
       const conversationID = window.sessionStorage.getItem('selectedConversationID') 
       console.log(conversationID)
       try{
-        const res = await axios.get(`http://localhost:5000/client/messages/${conversationID}` , {
+        const res = await axios.get(`https://server-service-t3fu.onrender.com/client/messages/${conversationID}` , {
           headers: {
               'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
           }
@@ -382,7 +382,7 @@ async function update_photo() {
 
   if(senderId) { 
     try{
-      const res = await axios.patch(`http://localhost:5000/client/update/`, formData, {
+      const res = await axios.patch(`https://server-service-t3fu.onrender.com/client/update/`, formData, {
         headers: {
             'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
         }
@@ -399,7 +399,7 @@ async function get_user_photo() {
   const senderId = window.localStorage.getItem('user').toString();
 
   try {
-    const res = await axios.get(`http://localhost:5000/client/api/images/`, {
+    const res = await axios.get(`https://server-service-t3fu.onrender.com/client/api/images/`, {
       params: { senderId }, 
       headers: {
         'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
@@ -419,7 +419,7 @@ useEffect( () =>{
     const senderId = window.localStorage.getItem('user').toString();
   
     try {
-      const res = await axios.get(`http://localhost:5000/client/api/images/`, {
+      const res = await axios.get(`https://server-service-t3fu.onrender.com/client/api/images/`, {
         params: { senderId },  
         headers: {
           'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
