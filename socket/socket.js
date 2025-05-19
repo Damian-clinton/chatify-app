@@ -4,6 +4,8 @@ const io = require("socket.io")(5010, {
     },
 }); 
 
+const PORT = process.env.PORT || 5010;
+
 let users = []
 let messages = []
 let TypingStatus = []
