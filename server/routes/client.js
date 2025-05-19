@@ -39,26 +39,32 @@ router.get('/search/:firstname', verifyUser, async function (req, res) {
 });
 
 router.post('/conversations/', verifyUser, async function (req, res) { 
-    try { 
-        const existingConversation = await conversationModel.findOne({
-            members: { $all: [req.body.senderId, req.body.receiverId] }
-        });
+  const { senderId, receiverId } = req.body;
 
-        if (existingConversation) {
-            return res.status(200).json(existingConversation);
-        }
+  if (!senderId || !receiverId) {
+    return res.status(400).json({ message: 'senderId and receiverId are required' });
+  }
 
-        const newConversation = new conversationModel({
-            members: [req.body.senderId, req.body.receiverId]
-        });
+  try { 
+    const existingConversation = await conversationModel.findOne({
+      members: { $all: [senderId, receiverId] }
+    });
 
-        const savedConversation = await newConversation.save();
-        res.status(200).json(savedConversation);
-
-    } catch (error) { 
-        console.log(error);
-        res.status(500).json({ message: 'Error creating conversation', error });
+    if (existingConversation) {
+      return res.status(200).json(existingConversation);
     }
+
+    const newConversation = new conversationModel({
+      members: [senderId, receiverId]
+    });
+
+    const savedConversation = await newConversation.save();
+    res.status(200).json(savedConversation);
+
+  } catch (error) { 
+    console.error('Conversation creation failed:', error);
+    res.status(500).json({ message: 'Error creating conversation', error });
+  }
 });
 
 
