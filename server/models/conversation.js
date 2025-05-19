@@ -4,7 +4,7 @@ import { Server } from "socket.io";
 const PORT = 5011; 
 const io = new Server(PORT, {
   cors: {
-    origin: "http://localhost:5001",
+    origin: "https://frontend-service-yc9z.onrender.com",
   },
 });
 
