@@ -11,7 +11,7 @@ export default function Login () {
    async function handlesubmit (e) {
         e.preventDefault();
         try { 
-            const response =  await axios.post('http://localhost:5000/auth/login',  {email, password})
+            const response =  await axios.post('https://server-service-t3fu.onrender.com/auth/login',  {email, password})
           if(response.data.msg === "successful") { 
             window.localStorage.setItem('chat-token', response.data.token)
             window.localStorage.setItem('user', response.data.user.id)
