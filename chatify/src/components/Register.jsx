@@ -13,7 +13,7 @@ const navigate = useNavigate()
   async function handlesubmit(e) { 
     e.preventDefault(); 
     try { 
-        const response =  await axios.post('http://localhost:5000/auth/register', {firstname, lastname, email, password})
+        const response =  await axios.post('https://server-service-t3fu.onrender.com/auth/register', {firstname, lastname, email, password})
       if(response.data.msg === "successful") { 
         navigate('/login')
       } 
