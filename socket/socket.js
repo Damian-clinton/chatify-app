@@ -1,10 +1,12 @@
+const PORT = process.env.PORT || 5010;
+
 const io = require("socket.io")(PORT, { 
     cors: { 
         origin: 'https://frontend-service-yc9z.onrender.com', 
     },
 }); 
 
-const PORT = process.env.PORT || 5010;
+
 
 let users = []
 let messages = []
