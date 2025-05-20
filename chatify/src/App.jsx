@@ -6,12 +6,12 @@ import Register from "./components/Register.jsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const [hasConversation, setHasConversation] = useState(null);
+  const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setIsLoggedIn(window.localStorage.getItem("user"));
-    setHasConversation(window.sessionStorage.getItem("selectedConversationID"));
+    setToken(window.localStorage.getItem('chat-token'));
     setLoading(false);
   }, []);
 
@@ -24,7 +24,7 @@ function App() {
         <Route
           path="/"
           element={
-            !isLoggedIn && !hasConversation ? <Navigate to="/login" /> : <Chattify />
+            !isLoggedIn && !token ? <Navigate to="/login" /> : <Chattify />
           }
         />
         <Route path="/register" element={<Register />} />
