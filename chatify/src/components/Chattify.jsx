@@ -33,6 +33,16 @@ export default function Chattify() {
   const sockett = useRef();
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+    const user = window.localStorage.getItem("user");
+    const token = window.localStorage.getItem("chat-token");
+
+    if (!user || !token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+  
   const senderId = window.localStorage.getItem('user');
   const conversationID = window.sessionStorage.getItem('selectedConversationID')  
 
