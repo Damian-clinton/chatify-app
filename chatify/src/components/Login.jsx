@@ -1,11 +1,12 @@
 import React, { useState }  from "react"; 
 import axios from "axios";
-import { Link } from "react-router-dom";
+import {useNavigate, Link } from "react-router-dom";
 
 export default function Login () { 
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('') 
+    const navigate = useNavigate()
     
    async function handlesubmit (e) {
         e.preventDefault();
@@ -15,7 +16,7 @@ export default function Login () {
     
             window.localStorage.setItem('chat-token', response.data.token)
             window.localStorage.setItem('user', response.data.user.id)
-            window.location.reload();
+            navigate("/")
           }
         }
            catch(err) {
