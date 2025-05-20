@@ -16,7 +16,7 @@ export default function Login () {
             navigate('/')
             window.localStorage.setItem('chat-token', response.data.token)
             window.localStorage.setItem('user', response.data.user.id)
-          
+            window.location.reload();
           }
         }
            catch(err) {
