@@ -28,7 +28,7 @@ function App() {
         <Route
           path="/"
           element={
-            !isLoggedIn && !token ? <Navigate to="/login" /> : <Chattify />
+            !isLoggedIn || !token ? <Navigate to="/login" /> : <Chattify />
           }
         />
         <Route path="/register" element={<Register />} />
