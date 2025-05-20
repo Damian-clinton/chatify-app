@@ -638,7 +638,6 @@ console.log(SearchedData)
                                 
                                <div className="p-5 rounded-lg max-w-md font-sans">
                                   <h2 className="text-2xl font-medium mb-2">Looking for someone?</h2>
-                                  <img src= "people search.png "  alt= 'people search' className="bg-gray-500"/>
                                   <br />
                                   <p className="font-normal">
                                     Start building your circle when you find and connect with friends. Just type in their name, username, or email.
@@ -659,7 +658,6 @@ console.log(SearchedData)
   {!convod.length > 0 ? (
     <div className="p-5 rounded-lg max-w-md font-sans justify-center items-center">
       <h2 className="text-2xl font-medium mb-2  text-gray-600">Tap into any conversation here.</h2>
-      <img src="mobile-message.png" alt="mobile-messaging" className="w-full max-w-xl h-90 bg-gray-500" />
       <br />
       <p className="font-normal text-gray-600">
         When you select a chat, this is where the magic happens. Send messages, share photos, voice notes, or even emojis—your full conversation experience all right here.
