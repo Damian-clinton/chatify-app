@@ -10,10 +10,14 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoggedIn(window.localStorage.getItem("user"));
-    setToken(window.localStorage.getItem('chat-token'));
-    setLoading(false);
-  }, []);
+  const user = window.localStorage.getItem("user");
+  const token = window.localStorage.getItem("chat-token");
+  console.log("user from localStorage:", user);
+  console.log("token from localStorage:", token);
+  setIsLoggedIn(user);
+  setToken(token);
+  setLoading(false);
+}, []); 
 
   if (loading) return <div>Loading...</div>;
 
