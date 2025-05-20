@@ -21,11 +21,11 @@ const UserSchema = new mongoose.Schema({
     }, 
     photo: { 
         type: String,
-        unique: true
+        required: false,
     },
     Bio: { 
         type: String,
-        unique: true
+        required: false,
     }
 });
 
