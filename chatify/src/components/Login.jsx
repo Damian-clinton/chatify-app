@@ -1,6 +1,6 @@
 import React, { useState }  from "react"; 
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login () { 
 
@@ -13,7 +13,7 @@ export default function Login () {
         try { 
             const response =  await axios.post('https://server-service-t3fu.onrender.com/auth/login',  {email, password})
           if(response.data.msg === "successful") { 
-            navigate('/')
+    
             window.localStorage.setItem('chat-token', response.data.token)
             window.localStorage.setItem('user', response.data.user.id)
             window.location.reload();
