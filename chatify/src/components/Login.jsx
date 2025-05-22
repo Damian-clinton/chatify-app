@@ -14,8 +14,8 @@ export default function Login () {
             const response =  await axios.post('https://server-service-t3fu.onrender.com/auth/login',  {email, password})
           if(response.data.msg === "successful") { 
     
-            window.localStorage.setItem('chat-token', response.data.token)
-            window.localStorage.setItem('user', response.data.user.id)
+            window.sessionStorage.setItem('chat-token', response.data.token)
+            window.sessionStorage.setItem('user', response.data.user.id)
             navigate("/")
           }
         }
