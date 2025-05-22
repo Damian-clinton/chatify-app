@@ -633,7 +633,7 @@ console.log(SearchedData)
                                                 }} >
                                                   <img
                                                     className="object-cover object-center h-12 w-12 rounded-full border-2"
-                                                    src={searchs.photo === "" ? 'user.png' : `https://server-service-t3fu.onrender.com/uploads/${searchs.photo}`} 
+                                                    src={searchs?.photo === "" ? 'user.png' : `https://server-service-t3fu.onrender.com/uploads/${searchs?.photo}`} 
                                                     alt="man"
                                                   />
                                                   <div className="ml-2" >
@@ -759,8 +759,8 @@ console.log(SearchedData)
         <div className="relative w-40 h-40 mt-3">
         {image &&
             <img
-              key={image._id} 
-              src={image.photo === "" ? 'user.png' : `https://server-service-t3fu.onrender.com/uploads/${image.photo}`} 
+              key={image?._id} 
+              src={image?.photo === "" ? 'user.png' : `https://server-service-t3fu.onrender.com/uploads/${image?.photo}`} 
               alt="Tony Montaro"
               className="rounded-full w-full h-full object-cover"
             />
