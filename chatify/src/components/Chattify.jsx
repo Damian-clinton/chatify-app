@@ -35,15 +35,15 @@ export default function Chattify() {
 
 
   useEffect(() => {
-    const user = window.localStorage.getItem("user");
-    const token = window.localStorage.getItem("chat-token");
+    const user = window.sessionStorage.getItem("user");
+    const token = window.sessionStorage.getItem("chat-token");
 
     if (!user || !token) {
       navigate("/login");
     }
   }, [navigate]);
   
-  const senderId = window.localStorage.getItem('user');
+  const senderId = window.sessionStorage.getItem("user");
   const conversationID = window.sessionStorage.getItem('selectedConversationID')  
 
   //fetch for web-sockets
@@ -127,7 +127,7 @@ export default function Chattify() {
           try {
               const response = await axios.get('https://server-service-t3fu.onrender.com/auth/verify', {
                   headers: {
-                      'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+                      'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
                   }
               });
               console.log(response);
@@ -150,7 +150,7 @@ export default function Chattify() {
     try {
         const res = await axios.get(`https://server-service-t3fu.onrender.com/client/search/${firstname.trim()}`, {
             headers: {
-                'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+                'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
             }
         });
         
@@ -171,7 +171,7 @@ export default function Chattify() {
 
   // add conversation to server
   async function createConversation(id) { 
-    const senderId = window.localStorage.getItem('user');
+    const senderId = window.sessionStorage.getItem('user');
     const receiverId = window.sessionStorage.getItem('receiverid');
 
     if (!receiverId) {
@@ -182,7 +182,7 @@ export default function Chattify() {
     try { 
       const res = await axios.post('https://server-service-t3fu.onrender.com/client/conversations/', {senderId, receiverId}, {
         headers: {
-            'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+            'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
         }
       })
       console.log(res.data);
@@ -194,11 +194,11 @@ export default function Chattify() {
   // get conversations from server
   useEffect(() => { 
     async function getConversation() { 
-      const senderId = window.localStorage.getItem('user');
+      const senderId = window.sessionStorage.getItem('user');
       try { 
         const res = await axios.get('https://server-service-t3fu.onrender.com/client/conversations/', { params : { senderId }, 
           headers: {
-              'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+              'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
           }
         });
         const response = res.data
@@ -218,11 +218,11 @@ export default function Chattify() {
 
   //NOTE: essentially, this is literally the same function as the one above inside the useEffect function, only brought it out here for calling purposes. 
   async function getConversation() { 
-    const senderId = window.localStorage.getItem('user');
+    const senderId = window.sessionStorage.getItem('user');
     try { 
       const res = await axios.get('https://server-service-t3fu.onrender.com/client/conversations/', { params : { senderId }, 
         headers: {
-            'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+            'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
         }
       });
       const response = res.data
@@ -240,7 +240,7 @@ export default function Chattify() {
   useEffect(() => {
     if (conversation.length > 0) {
       console.log(conversation)
-      const senderId = window.localStorage.getItem('user');
+      const senderId = window.sessionStorage.getItem('user');
       const friendId = conversation.map(conversations => {
         return conversations.members.filter(member => member !== senderId)
       }).flat();
@@ -250,7 +250,7 @@ export default function Chattify() {
         try { 
           const res = await axios.get('https://server-service-t3fu.onrender.com/client/conversation/', { params: { friendId },
             headers: {
-                'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+                'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
             }
           });
           console.log(res.data);
@@ -289,13 +289,13 @@ async function getFilterChats(id) {
   async function getconversationid(memberID) { 
             const member =  convo.filter((conv) => conv._id === memberID)
             const memberId = member[0]._id
-           const senderId = window.localStorage.getItem('user');
+           const senderId = window.sessionStorage.getItem('user');
 
               if(memberId && senderId) { 
                 try { 
                   const res = await axios.get('https://server-service-t3fu.onrender.com/client/getconversationid/', { params : {memberId, senderId}, 
                     headers: {
-                        'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+                        'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
                     }
                   }) 
                   console.log(res.data)
@@ -311,7 +311,7 @@ async function getFilterChats(id) {
   
   async function sendMessage() {  
     const conversationID = window.sessionStorage.getItem('selectedConversationID');
-    const senderId = window.localStorage.getItem('user');
+    const senderId = window.sessionStorage.getItem('user');
 
     if (!message.trim()) {
       console.log("Please enter a message.");
@@ -323,7 +323,7 @@ async function getFilterChats(id) {
         sender: senderId, 
         context: message}, {
           headers: {
-              'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+              'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
           }
         }); 
         if(res.data){
@@ -343,7 +343,7 @@ async function getFilterChats(id) {
       try{
         const res = await axios.get(`https://server-service-t3fu.onrender.com/client/messages/${conversationID}` , {
           headers: {
-              'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+              'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
           }
         });
         console.log(res.data)
@@ -383,7 +383,7 @@ async function getFilterChats(id) {
  },[fileName])
 
 async function update_photo() { 
-  const senderId = window.localStorage.getItem('user').toString();
+  const senderId = window.sessionStorage.getItem('user').toString();
    
   const formData = new FormData()
      formData.append("profile", fileName);
@@ -394,7 +394,7 @@ async function update_photo() {
     try{
       const res = await axios.patch(`https://server-service-t3fu.onrender.com/client/update/`, formData, {
         headers: {
-            'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+            'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
         }
       });
       console.log(res.data)
@@ -406,13 +406,13 @@ async function update_photo() {
 }; 
 
 async function get_user_photo() {
-  const senderId = window.localStorage.getItem('user').toString();
+  const senderId = window.sessionStorage.getItem('user').toString();
 
   try {
     const res = await axios.get(`https://server-service-t3fu.onrender.com/client/api/images/`, {
       params: { senderId }, 
       headers: {
-        'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+        'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
       }
     });
 
@@ -426,13 +426,13 @@ async function get_user_photo() {
 
 useEffect( () =>{
   async function get_user_photo() {
-    const senderId = window.localStorage.getItem('user').toString();
+    const senderId = window.sessionStorage.getItem('user').toString();
   
     try {
       const res = await axios.get(`https://server-service-t3fu.onrender.com/client/api/images/`, {
         params: { senderId },  
         headers: {
-          'authorization': `Bearer ${window.localStorage.getItem('chat-token')}`
+          'authorization': `Bearer ${window.sessionStorage.getItem('chat-token')}`
         }
       });
   
